@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Emoji Character</title>
+    <style>
+      @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fade-out {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+#emoji.fade-in {
+    animation: fade-in 0.5s forwards;
+}
+
+#emoji.fade-out {
+    animation: fade-out 0.5s forwards;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span id="emoji" role="img" aria-label="emoji">😐</span>
+        <div>
+            <button onclick="changeEmotion('happy')">Happy</button>
+            <button onclick="changeEmotion('sad')">Sad</button>
+            <button onclick="changeEmotion('angry')">Angry</button>
+            <button onclick="changeEmotion('confused')">Confused</button>
+<button onclick="changeEmotion('surprised')">Surprised</button>
+<button onclick="changeEmotion('disgusted')">Disgusted</button>
+<button onclick="changeEmotion('fearful')">Fearful</button>
+<button onclick="changeEmotion('lovestruck')">Lovestruck</button>
+
+</div>
+    </div>
+    <script>
+       function changeEmotion(emotion) {
+    const emoji = document.getElementById("emoji");
+    emoji.classList.add("fade-out");
+
+    setTimeout(() => {
+        switch (emotion) {
+            case 'happy':
+                emoji.textContent = '😄';
+                break;
+            case 'sad':
+                emoji.textContent = '😢';
+                break;
+            case 'angry':
+                emoji.textContent = '😠';
+                break;
+            case 'confused':
+                emoji.textContent = '😕';
+                break;
+            case 'surprised':
+                emoji.textContent = '😮';
+                break;
+            case 'disgusted':
+                emoji.textContent = '🤢';
+                break;
+            case 'fearful':
+                emoji.textContent = '😨';
+                break;
+            case 'lovestruck':
+                emoji.textContent = '😍';
+                break;
+            default:
+                emoji.textContent = '😐';
+        }
+        emoji.classList.remove("fade-out");
+        emoji.classList.add("fade-in");
+    }, 500);
+
+    setTimeout(() => {
+        emoji.classList.remove("fade-in");
+    }, 1000);
+}
+
+
+    </script>
+</body>
+</html>
