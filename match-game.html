@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Card Matching Game</title>
+  <style>body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  max-width: 400px;
+}
+
+.card {
+  background-color: #6b705c;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 0;
+  padding-bottom: 25%;
+  position: relative;
+  cursor: pointer;
+}
+
+.card.open {
+  background-color: #ffe8d6;
+}
+
+.card-text {
+  display: none;
+  position: absolute;
+  font-size: 2em;
+}
+
+.card.open .card-text {
+  display: block;
+}
+</style>
+</head>
+<body>
+  <div class="game-board" id="game-board"></div>
+  <script>const gameBoard = document.getElementById("game-board");
+const cards = [
+  "A", "A", "B", "B", "C", "C", "D", "D",
+  "E", "E", "F", "F", "G", "G", "H", "H"
+];
+let openCards = [];
+let matchedPairs = 0;
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function createCard(value) {
+  const card = document.createElement("div");
+  card.classList.add("card");
+  card.addEventListener("click", () => handleCardClick(card));
+
+  const cardText = document.createElement("div");
+  cardText.classList.add("card-text");
+  cardText.textContent = value;
+  card.appendChild(cardText);
+
+  return card;
+}
+
+function handleCardClick(card) {
+  if (openCards.length < 2 && !card.classList.contains("open")) {
+    card.classList.add("open");
+    openCards.push(card);
+    if (openCards.length === 2) {
+      checkMatch();
+    }
+  }
+}
+
+function checkMatch() {
+  const [firstCard, secondCard] = openCards;
+  if (firstCard.textContent === secondCard.textContent) {
+    matchedPairs++;
+    if (matchedPairs === cards.length / 2) {
+      setTimeout(() => {
+        alert("You've won!");
+        location.reload();
+      }, 500);
+    }
+  } else {
+    setTimeout(() => {
+      firstCard.classList.remove("open");
+      secondCard.classList.remove("open");
+    }, 1000);
+  }
+  openCards = [];
+}
+
+function initGame() {
+  const shuffledCards = shuffle(cards);
+  shuffledCards.forEach(cardValue => {
+    const card = createCard(cardValue
+</script>
+</body>
+</html>
