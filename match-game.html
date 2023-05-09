@@ -51,7 +51,8 @@
 </head>
 <body>
   <div class="game-board" id="game-board"></div>
-  <script>const gameBoard = document.getElementById("game-board");
+  <script>
+    const gameBoard = document.getElementById("game-board");
 const cards = [
   "A", "A", "B", "B", "C", "C", "D", "D",
   "E", "E", "F", "F", "G", "G", "H", "H"
@@ -112,7 +113,14 @@ function checkMatch() {
 function initGame() {
   const shuffledCards = shuffle(cards);
   shuffledCards.forEach(cardValue => {
-    const card = createCard(cardValue
-</script>
+    const card = createCard(cardValue);
+    gameBoard.appendChild(card);
+  });
+}
+
+initGame();
+
+    
+  </script>
 </body>
 </html>
